@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bill</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: center;
+      }
+
+      h1 {
+        margin-bottom: 20px;
+      }
+
+      h2 {
+        margin-top: 20px;
+      }
+
+      .party-section {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+      }
+
+      .party-section div {
+        width: 48%;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      .summary-section {
+        margin-top: 20px;
+      }
+
+      .important-note {
+        margin-top: 20px;
+      }
+
+      /* Additional Styles */
+
+      table td:first-child,
+      table th:first-child {
+        text-align: left;
+      }
+
+      table th:last-child,
+      table td:last-child {
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1><u>Invoice</u></h1>
+      <div>
+        <h2>GuruKripa Enterprises</h2>
+        <p>Address: 39 SANGAM VIHAR BHATIA MORE GZB</p>
+        <p>Phone: 9212567719</p>
+        <p>GST NO: 123456789</p>
+      </div>
+
+      <div class="party-section">
+        <div>
+          <h2>Bill To Party</h2>
+          <p>Name: {{billToParty.name}}</p>
+          <p>GST NO: {{billToParty.gstNo}}</p>
+          <p>Address: {{billToParty.address}}</p>
+          <p>State: {{billToParty.state}}</p>
+        </div>
+
+        <div>
+          <h2>Ship To Party</h2>
+          <p>Name: {{shipToParty.name}}</p>
+          <p>GST NO: {{shipToParty.gstNo}}</p>
+          <p>Address: {{shipToParty.address}}</p>
+          <p>State: {{shipToParty.state}}</p>
+        </div>
+      </div>
+
+      <h2>Items</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>HSN Code</th>
+            <th>Type of Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Taxable Amount</th>
+            <th>Discount</th>
+            <th>Amount after Discount</th>
+            <th>CGST</th>
+            <th>CGST Amount</th>
+            <th>SGST</th>
+            <th>SGST Amount</th>
+            <th>Total Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each items}}
+          <tr>
+            <td>{{name}}</td>
+            <td>{{hsnCode}}</td>
+            <td>{{itemType}}</td>
+            <td>{{price}}</td>
+            <td>{{quantity}}</td>
+            <td>{{taxableAmount}}</td>
+            <td>{{discount}}</td>
+            <td>{{amountAfterDiscount}}</td>
+            <td>{{cgst}}</td>
+            <td>{{cgstAmount}}</td>
+            <td>{{sgst}}</td>
+            <td>{{sgstAmount}}</td>
+            <td>{{totalAmount}}</td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+      <div class="summary-section">
+        <h2>Summary</h2>
+        <p>Grand Total: {{grandTotal}}</p>
+      </div>
+
+      <div class="important-note">
+        <h2>Important Note</h2>
+        <p>Goods once sold will not be taken back</p>
+        <!-- Add a section for stamp and signature here -->
+      </div>
+    </div>
+  </body>
+</html>

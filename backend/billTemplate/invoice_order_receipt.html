@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Invoice Order Receipt - Bootdey.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style type="text/css">
+      /* Add styling for the box */
+      .note-box {
+        border: 1px solid #ccc;
+        padding: 10px;
+        background-color: #f9f9f9;
+        margin-top: 20px;
+      }
+
+      /* Add styling for the note text */
+      .note-text {
+        font-weight: bold;
+        font-size: 16px;
+        color: #333;
+      }
+      body {
+        margin-top: 20px;
+        background: #eee;
+      }
+
+      .invoice {
+        padding: 30px;
+      }
+
+      .invoice h2 {
+        margin-top: 0px;
+        line-height: 0.8em;
+      }
+
+      .invoice .small {
+        font-weight: 300;
+      }
+
+      .invoice hr {
+        margin-top: 10px;
+        border-color: #ddd;
+      }
+
+      .invoice .table tr.line {
+        border-bottom: 1px solid #ccc;
+      }
+
+      .invoice .table td {
+        border: none;
+      }
+
+      .invoice .identity {
+        margin-top: 10px;
+        font-size: 1.1em;
+        font-weight: 300;
+      }
+
+      .invoice .identity strong {
+        font-weight: 600;
+      }
+
+      .grid {
+        position: relative;
+        width: 100%;
+        background: #fff;
+        color: #666666;
+        border-radius: 2px;
+        margin-bottom: 25px;
+        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="grid invoice">
+            <div class="grid-body">
+              <div class="invoice-title">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <h1>GuruKripa Enterprises</h1>
+                    <h4>
+                      39, Sangam Vihar, Bhatia Road, Ghaziabad, Uttar Pradesh,
+                      201001
+                    </h4>
+                    <h4>(+91)9212567719</h4>
+                    <h4>GST: 09AWKPS2028J1Z5</h4>
+                    <br />
+                    <h2>
+                      invoice<br />
+                      <span class="small">Bill #{{invoiceNumber}}</span>
+                    </h2>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <div class="row">
+                <div class="col-xs-6">
+                  <address>
+                    <strong>Billed To:</strong><br />
+                    {{billToParty.name}}<br />
+                    {{billToParty.address}}<br />
+                    GST: {{billToParty.gstNo}}
+                  </address>
+                </div>
+                <div class="col-xs-6 text-right">
+                  <address>
+                    <strong>Shipped To:</strong><br />
+                    {{shipToParty.name}}<br />
+                    {{shipToParty.address}}<br />
+                    GST: {{shipToParty.gstNo}}
+                  </address>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6">
+                  <address>
+                    <strong>Payment Method:</strong><br />
+                    Cash
+                  </address>
+                </div>
+                <div class="col-xs-6 text-right">
+                  <address>
+                    <strong>Order Date:</strong><br />
+                    {{invoiceDate}}
+                  </address>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h3>ORDER SUMMARY</h3>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr class="line">
+                        <td><strong>#</strong></td>
+                        <td class="text-center">
+                          <strong>Particulars</strong>
+                        </td>
+                        <td class="text-center"><strong>HSN</strong></td>  
+                        <td class="text-center"><strong>UOC</strong></td>
+                        <td class="text-right"><strong>Price</strong></td>
+                        <td class="text-right"><strong>Quantity</strong></td>
+                        <td class="text-right">
+                          <strong>Taxable Amount</strong>
+                        </td>
+                        <td class="text-right"><strong>CGST</strong></td>
+                        <td class="text-right"><strong>CGST Amount</strong></td>
+                        <td class="text-right"><strong>SGST</strong></td>
+                        <td class="text-right"><strong>SGST Amount</strong></td>
+                        <td class="text-right"><strong>Total</strong></td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {{#each items}}
+                      <tr>
+                        <td>{{@index}}</td>
+                        <td>{{name}}</td>
+                        <td class="text-center">{{hsnCode}}</td>    
+                        <td class="text-center">{{itemType}}</td>
+                        <td class="text-right">{{price}}</td>
+                        <td class="text-right">{{quantity}}</td>
+                        <td class="text-right">{{taxableAmount}}</td>
+                        <td class="text-right">{{cgst}}</td>
+                        <td class="text-right">{{cgstAmount}}</td>
+                        <td class="text-right">{{sgst}}</td>
+                        <td class="text-right">{{sgstAmount}}</td>
+                        <td class="text-right">{{totalAmount}}</td>
+                      </tr>
+                      {{/each}}
+                      <tr>
+                        <td colspan="10"></td>
+                        <td class="text-right"><strong>Grand Total</strong></td>
+                        <td class="text-right">
+                          <strong>{{grandTotal}}</strong>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div><b>Amount in Words:</b> {{amountInWords}}</div>
+                </div>
+              </div>
+              </br>
+              </br>
+              
+              <div class="row">
+                <div class="col-md-12 text-right identity">
+                  <p>
+                    Signed and Sealed by<br /><strong
+                      >Guru Kripa Enterprises</strong
+                    >
+                  </p>
+                </div>
+              </div>
+              <div class="note-box">
+                <p class="note-text">Important Note:</p>
+                <p>
+                  Terms & conditions :goods once sold will not be taken back.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      data-cfasync="false"
+      src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+    ></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript"></script>
+  </body>
+</html>
